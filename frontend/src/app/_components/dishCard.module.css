@@ -1,0 +1,97 @@
+.mediumPaper {
+  display: flex;
+  flex-direction: row;
+}
+
+.mediumInfo {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0.3rem;
+  gap: 0.3rem;
+}
+
+.mediumImage {
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 40%;
+  aspect-ratio: 1;
+  margin: 0.3rem;
+}
+
+.mediumVerticalPaper {
+  display: flex;
+  flex-direction: column-reverse;
+  max-width: 10rem;
+}
+
+.mediumVerticalImage {
+  display: flex;
+  position: relative;
+  width: '-moz-available';
+  aspect-ratio: 1;
+  margin: 0.3rem;
+}
+
+.mediumVerticalInfo {
+  display: flex;
+  flex-direction: column;
+  margin: 0.3rem;
+  gap: 0.3rem;
+}
+
+.fullPaper {
+  display: flex;
+  flex-direction: column;
+}
+
+.fullImage {
+  display: flex;
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.fullText {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.ellipsisText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.strikeText {
+  text-decoration: line-through;
+}
+
+.prices {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+
+@media (max-width: 500px) {
+  .mediumPaper {
+    flex-direction: column-reverse;
+    max-width: 10rem;
+  }
+
+  .mediumInfo {
+    width: unset;
+    margin: 0.3rem;
+    gap: 0.3rem;
+  }
+
+  .mediumImage {
+    width: -moz-available;
+    max-width: unset;
+  }
+}
