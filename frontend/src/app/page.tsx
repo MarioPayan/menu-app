@@ -6,7 +6,9 @@ export default async function Home() {
   return (
     <main className={styles.main}>
       {slugs.map(slug => (
-        <a href={`http://localhost:3000/menu/${slug}`}>{slug}</a>
+        <a href={`http://localhost:3000/menu/${slug}`} key={slug}>
+          {slug}
+        </a>
       ))}
     </main>
   )

@@ -5,6 +5,7 @@ import {TransitionProps} from '@mui/material/transitions'
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
+    // TODO: Fix this type
     children: React.ReactElement<any, any>
   },
   ref: React.Ref<unknown>

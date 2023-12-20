@@ -25,7 +25,7 @@ const Prices = ({prices}: {prices: Price[]}) => {
         <Typography fontWeight='bold'>{finalPrice}</Typography>
         {price.discountPercentage !== 0 && (
           <>
-            <Typography className={styles.strikeText}>{originalPrice}</Typography>
+            <Typography className={styles.originalPrice}>{originalPrice}</Typography>
             <Typography>{discountPercentage}</Typography>
           </>
         )}
@@ -47,7 +47,7 @@ const MediumDishCard = ({dish}: {dish: Dish}) => (
       <Typography variant='h6' fontWeight='bold'>
         {dish.name}
       </Typography>
-      <Typography variant='body1' className={styles.ellipsisText}>
+      <Typography variant='body1' className={styles.dishDescription}>
         {dish.description}
       </Typography>
       <Prices prices={dish.prices} />
@@ -58,15 +58,19 @@ const MediumDishCard = ({dish}: {dish: Dish}) => (
   </Paper>
 )
 
-const FullDishCard = ({dish}: {dish: Dish}) => 
-// const ingredientsByCategory = dish.ingredients
-//   .map(category => ({
-//     ...category,
-//     dishes: menu.dishes.filter(dish => dish.categories.map(category => category.id).includes(category.id)),
-//   }))
-//   .filter(category => category.dishes.length > 0)
-
-  (
+const FullDishCard = ({dish}: {dish: Dish}) => {
+  const getIngredientColorsCSS = (ingredient: Ingredient) => {
+    const colors = ingredient.categories.map(category => category.color)
+    let cssProps = {}
+    if (colors.length === 1) {
+      cssProps = {backgroundColor: colors[0]}
+    }
+    if (colors.length > 1) {
+      cssProps = {background: `linear-gradient(90deg, ${colors.join(', ')})`}
+    }
+    return cssProps
+  }
+  return (
     <Paper className={styles.fullPaper}>
       <Box className={styles.fullImage}>
         <Image src={dish.mainImage || defaultDishImage} alt={dish.name} fill />
@@ -78,12 +82,19 @@ const FullDishCard = ({dish}: {dish: Dish}) =>
         <Typography variant='body1'>{dish.description}</Typography>
         <Prices prices={dish.prices} />
         {dish.ingredients.map(ingredient => (
-          <Typography key={ingredient.id}>{ingredient.name}</Typography>
+          <Typography
+            key={ingredient.id}
+            sx={{
+              // TODO: Improve presentation
+              ...getIngredientColorsCSS(ingredient),
+            }}>
+            {ingredient.name}
+          </Typography>
         ))}
       </Box>
     </Paper>
   )
-
+}
 
 const DishCard = ({dish}: {dish: Dish}) => {
   const [dishModal, setDishModal] = useState<Dish | undefined>(undefined)
@@ -93,7 +104,12 @@ const DishCard = ({dish}: {dish: Dish}) => {
   }
 
   return (
-    <ButtonBase onClick={() => setDishModal(dish)}>
+    <ButtonBase
+      sx={{
+        display: 'flex',
+        alignItems: 'flex-start',
+      }}
+      onClick={() => setDishModal(dish)}>
       <MediumDishCard dish={dish} />
       <Modal isOpen={!!dishModal} close={() => setDishModal(undefined)}>
         {dishModal ? <FullDishCard dish={dishModal} /> : <></>}

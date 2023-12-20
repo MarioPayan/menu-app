@@ -11,7 +11,7 @@ const Menu = async ({params}: {params: {menu_slug: string}}) => {
   if (!menu) {
     return <MenuNotFound />
   }
-  const dishesByCategories = menu.categories
+  const dishesByCategories = menu.dishCategories
     .map(category => ({
       ...category,
       dishes: menu.dishes.filter(dish => dish.categories.map(category => category.id).includes(category.id)),
@@ -35,6 +35,7 @@ const Menu = async ({params}: {params: {menu_slug: string}}) => {
               display: 'flex',
               flexDirection: 'row',
               flexWrap: 'wrap',
+              justifyContent: 'center',
               gap: '1rem',
             }}>
             {menu.dishes.map(dish => (

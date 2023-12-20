@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: { // TODO: Replace with the actual domain
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
-        port: '',
-        pathname: '**',
-      },
-    ],
+    domains: ['placekitten.com', 'dummyimage.com', 'picsum.photos'],
   },
 }
 

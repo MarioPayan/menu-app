@@ -31,7 +31,10 @@ const DishCategoryCard = ({category, children}: {category: DishCategory; childre
     return <DishCategoryNotFound />
   }
   return (
-    <Box sx={{padding: '0.5rem'}}>
+    <Box
+      sx={{
+        padding: '0.5rem',
+      }}>
       <Banner category={category} />
       {children}
     </Box>
