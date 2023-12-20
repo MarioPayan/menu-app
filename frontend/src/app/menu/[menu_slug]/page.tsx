@@ -11,12 +11,27 @@ const Menu = async ({params}: {params: {menu_slug: string}}) => {
   if (!menu) {
     return <MenuNotFound />
   }
+
+  const dishesFromCategory = (category: DishCategory): Dish[] =>
+    menu.dishes.filter(dish => dish.categories.map(category => category.id).includes(category.id))
+
   const dishesByCategories = menu.dishCategories
     .map(category => ({
       ...category,
-      dishes: menu.dishes.filter(dish => dish.categories.map(category => category.id).includes(category.id)),
+      dishes: dishesFromCategory(category),
     }))
-    .filter(category => category.dishes.length > 0)
+    .filter(category => category.dishes.length >= 1)
+
+  const ingredientsFromCategory = (category: IngredientCategory) =>
+    menu.ingredients.filter(ingredient => ingredient.categories.map(category => category.id).includes(category.id))
+
+  const ingredientsByCategories = menu.ingredientCategories
+    .map(category => ({
+      ...category,
+      ingredients: ingredientsFromCategory(category),
+    }))
+    .filter(category => category.ingredients.length >= 1)
+
   return (
     <Box
       sx={{

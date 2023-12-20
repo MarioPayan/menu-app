@@ -82,6 +82,7 @@ type Menu = {
   restaurant: Restaurant
   dishes: Dish[]
   dishCategories: DishCategory[]
+  ingredients: Ingredient[]
   ingredientCategories: IngredientCategory[]
   combos: Combos[]
 } & ApiObject

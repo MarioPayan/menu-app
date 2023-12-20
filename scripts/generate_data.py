@@ -132,13 +132,14 @@ def generate_user():
     return {"name": fake.name(), "email": fake.email(), **generate_api_object()}
 
 
-def generate_menu(restaurant, dishes, dish_categories, ingredient_categories, combos):
+def generate_menu(restaurant, dishes, dish_categories, ingredients, ingredient_categories, combos):
     return {
         "slug": fake.slug(),
         "name": fake.word(),
         "restaurant": restaurant,
         "dishes": dishes,
         "dishCategories": dish_categories,
+        "ingredients": ingredients,
         "ingredientCategories": ingredient_categories,
         "combos": combos,
         **generate_api_object(),
@@ -152,7 +153,7 @@ dishes = [generate_dish(dish_categories, ingredients) for _ in range(18)]
 combos = [generate_combo(dishes) for _ in range(4)]
 restaurant = generate_restaurant()
 
-menu = generate_menu(restaurant, dishes, dish_categories, ingredient_categories, combos)
+menu = generate_menu(restaurant, dishes, dish_categories, ingredients, ingredient_categories, combos)
 
 output_file_path = "../frontend/src/app/api/data.json"
 with open(output_file_path, "w") as output_file:
